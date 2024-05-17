@@ -1,0 +1,65 @@
+{
+  "name": "fastify-drizzle-quick-start",
+  "version": "1.0.0",
+  "description": "Quick start for Fastify, TypeScript, ESlint, Prettier and DrizzleORM",
+  "type": "module",
+  "main": "index.js",
+  "repository": "https://github.com/Looskie/fastify-drizzle-quick-start.git",
+  "author": "Cody Miller <50378828+Looskie@users.noreply.github.com>",
+  "license": "none",
+  "scripts": {
+    "lint": "xo",
+    "dev": "tsx watch --clear-screen=false src/index.ts",
+    "prettier": "prettier --write .",
+    "migrate": "drizzle-kit generate:pg",
+    "build": "tsc -p tsconfig.json && tsc-alias -p tsconfig.json",
+    "start": "node src/index.js"
+  },
+  "devDependencies": {
+    "@types/cli-color": "^2.0.6",
+    "@types/node": "^20.10.4",
+    "@types/pg": "^8.10.9",
+    "cli-color": "^2.0.3",
+    "dotenv": "^16.3.1",
+    "drizzle-kit": "^0.20.6",
+    "prettier": "^3.1.1",
+    "tsc-alias": "^1.8.8",
+    "tsx": "^3.12.7",
+    "typescript": "^5.3.3",
+    "xo": "^0.56.0"
+  },
+  "dependencies": {
+    "@fastify/cors": "^8.4.2",
+    "drizzle-orm": "^0.29.1",
+    "fastify": "^4.25.0",
+    "fastify-plugin": "^4.5.1",
+    "pg": "^8.11.3",
+    "redis": "^4.6.11",
+    "tsc": "^2.0.4",
+    "zod": "^3.22.4"
+  },
+  "xo": {
+    "rules": {
+      "import/extensions": "off",
+      "@typescript-eslint/quotes": [
+        "error",
+        "double"
+      ],
+      "@typescript-eslint/indent": [
+        "error",
+        2
+      ],
+      "@typescript-eslint/object-curly-spacing": [
+        "error",
+        "always"
+      ],
+      "n/prefer-global/process": "off",
+      "@typescript-eslint/no-extraneous-class": "off",
+      "arrow-parens": [
+        "error",
+        "always"
+      ],
+      "@typescript-eslint/no-floating-promises": "off"
+    }
+  }
+}
