@@ -8,7 +8,7 @@ export const statusEnum = pgEnum("statuses", ["submitted", "testing", "completed
 export const users = pgTable("users", {
   id: uuid("id").defaultRandom().primaryKey(),
   username: text("username").notNull().unique(),
-  password: text("password", { length: 256 }).notNull(),
+  hash_password: text("password", { length: 256 }).notNull(),
   created_at: timestamp("created_at").defaultNow()
 });
 
