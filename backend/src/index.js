@@ -1,5 +1,5 @@
 import { initDb } from "./db/index.js";
-import { testRoutes } from "./routes/index.js";
+import { authRoutes, testRoutes } from "./routes/index.js";
 import { env, Logger, Redis } from "./utils/index.js";
 import fastify from "fastify";
 import { middleware } from "./modules/middleware.js";
@@ -26,6 +26,11 @@ export const main = async () => {
   server.register(testRoutes, {
     prefix: `/${API_VERSION}/test`,
   });
+
+  server.register(authRoutes, {
+    prefix: `/${API_VERSION}/auth`,
+  });
+
 
   server.listen({ host: env.HOST, port: env.PORT }, (error, address) => {
     if (error) {

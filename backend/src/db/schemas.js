@@ -12,6 +12,11 @@ export const users = pgTable("users", {
   created_at: timestamp("created_at").defaultNow()
 });
 
+export const sessions = pgTable("session", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  user_id: uuid("id").references(() => users.id)
+});
+
 export const problems = pgTable("problems", {
   id: uuid("id").defaultRandom().primaryKey(),
   title: text("title").notNull(),
@@ -33,7 +38,4 @@ export const submissions = pgTable("submission", {
   user_id: uuid("user_id").references(() => users.id).notNull(),
   content: text("content").notNull(),
   status: statusEnum("status").notNull().default("submitted"),
-})
-
-
-
+});
