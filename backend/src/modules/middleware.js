@@ -10,7 +10,7 @@ const middleware = fp(
    */
   async (fastify, _options) => {
   fastify.addHook("onRequest", async (request) => {
-    request.redis = Redis;
+    //request.redis = Redis;
     request.db = db;
   });
 });
