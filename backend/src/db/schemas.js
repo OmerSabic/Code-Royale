@@ -8,13 +8,13 @@ export const statusEnum = pgEnum("statuses", ["submitted", "testing", "completed
 export const users = pgTable("users", {
   id: uuid("id").defaultRandom().primaryKey(),
   username: text("username").notNull().unique(),
-  hash_password: text("password", { length: 256 }).notNull(),
+  hashed_password: text("password", { length: 256 }).notNull(),
   created_at: timestamp("created_at").defaultNow()
 });
 
-export const sessions = pgTable("session", {
+export const sessions = pgTable("sessions", {
   id: uuid("id").defaultRandom().primaryKey(),
-  user_id: uuid("id").references(() => users.id)
+  user_id: uuid("user_id").references(() => users.id)
 });
 
 export const problems = pgTable("problems", {
@@ -25,14 +25,14 @@ export const problems = pgTable("problems", {
   difficulty: difficultyEnum("difficulty").notNull()
 })
 
-export const matches = pgTable("match", {
+export const matches = pgTable("matches", {
   id: uuid("id").defaultRandom().primaryKey(),
   modes: modesEnum("modes").array().notNull(),
   problem_id: uuid("problem_id").references(() => problems.id),
   players: uuid("players").references(() => users.id).array()
 });
 
-export const submissions = pgTable("submission", {
+export const submissions = pgTable("submissions", {
   id: uuid("id").defaultRandom().primaryKey(),
   match_id: uuid("match_id").references(() => matches.id).notNull(),
   user_id: uuid("user_id").references(() => users.id).notNull(),

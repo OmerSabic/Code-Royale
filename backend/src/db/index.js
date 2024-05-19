@@ -9,32 +9,36 @@ const { Pool } = pgpkg;
 export let db;
 
 export const initDb = async () => {
-  const pool = await new Pool({
-    connectionString: env.DATABASE_URL,
-  })
-    .connect()
-    .then((client) => {
-      Logger.info("INIT", "Connected to database");
+  try {
 
-      return client;
+    const pool = await new Pool({
+      connectionString: env.DATABASE_URL,
     })
-    .catch((error) => {
-      Logger.error("INIT", `Failed to connect to database ${String(error)}}`);
-      throw new Error(`Failed to connect to database ${String(error)}`);
-    });
+      .connect()
+      .then((client) => {
+        Logger.info("INIT", "Connected to database");
 
-  db = drizzle(pool, {
-    schema,
-  });
+        return client;
+      })
+      .catch((error) => {
+        Logger.error("INIT", `Failed to connect to database ${String(error)}}`);
+        throw new Error(`Failed to connect to database ${String(error)}`);
+      });
 
-  await migrate(db, {
-    migrationsFolder: "./src/db/migrations",
-  })
-    .then(() => {
-      Logger.info("INIT", "Migrated database");
-    })
-    .catch((error) => {
-      Logger.error("INIT", `Failed to migrate database ${String(error)}`);
-      throw new Error(`Failed to migrate database ${String(error)}`);
+    db = drizzle(pool, {
+      schema,
     });
+  } catch (e) {
+    console.log(e);
+  }
+  // await migrate(db, {
+  //   migrationsFolder: "./src/db/migrations",
+  // })
+  //   .then(() => {
+  //     Logger.info("INIT", "Migrated database");
+  //   })
+  //   .catch((error) => {
+  //     Logger.error("INIT", `Failed to migrate database ${String(error)}`);
+  //     throw new Error(`Failed to migrate database ${String(error)}`);
+  //   });
 };

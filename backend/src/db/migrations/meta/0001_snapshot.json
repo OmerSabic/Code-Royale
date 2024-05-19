@@ -1,6 +1,6 @@
 {
-  "id": "5ca1d104-d2b6-4ff8-8453-4e24e4bec60d",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "0f67deb4-1b87-47be-ae07-9d19bfd7d6ce",
+  "prevId": "5ca1d104-d2b6-4ff8-8453-4e24e4bec60d",
   "version": "5",
   "dialect": "pg",
   "tables": {
@@ -101,18 +101,25 @@
         "id": {
           "name": "id",
           "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
           "primaryKey": false,
           "notNull": false
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "sessions_id_users_id_fk": {
-          "name": "sessions_id_users_id_fk",
+        "sessions_user_id_users_id_fk": {
+          "name": "sessions_user_id_users_id_fk",
           "tableFrom": "sessions",
           "tableTo": "users",
           "columnsFrom": [
-            "id"
+            "user_id"
           ],
           "columnsTo": [
             "id"

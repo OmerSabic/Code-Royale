@@ -9,7 +9,7 @@
   "license": "none",
   "scripts": {
     "lint": "xo",
-    "dev": "tsx watch --clear-screen=false src/index.ts",
+    "dev": "tsx watch --clear-screen=false src/index.js",
     "prettier": "prettier --write .",
     "migrate": "drizzle-kit generate:pg",
     "build": "tsc -p tsconfig.json && tsc-alias -p tsconfig.json",
@@ -31,6 +31,7 @@
   "dependencies": {
     "@fastify/cookie": "^9.3.1",
     "@fastify/cors": "^8.4.2",
+    "@fastify/websocket": "^10.0.1",
     "bcrypt": "^5.1.1",
     "drizzle-orm": "^0.29.1",
     "fastify": "^4.25.0",

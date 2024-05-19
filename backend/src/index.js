@@ -1,9 +1,10 @@
 import { initDb } from "./db/index.js";
-import { authRoutes, testRoutes } from "./routes/index.js";
+import { authRoutes, testRoutes, wsRoutes } from "./routes/index.js";
 import { env, Logger, Redis } from "./utils/index.js";
 import fastify from "fastify";
 import fastifyCookie from "@fastify/cookie";
 import { middleware } from "./modules/middleware.js";
+import fastifyWebsocket from "@fastify/websocket";
 const API_VERSION = "v1";
 
 export const main = async () => {
@@ -31,6 +32,13 @@ export const main = async () => {
   server.register(testRoutes, {
     prefix: `/${API_VERSION}/test`,
   });
+  server.register(fastifyWebsocket, {
+    options: { maxPayload: 1048576 }
+});
+  server.register(wsRoutes, {
+    prefix: "/"
+  });
+  
 
   server.register(authRoutes, {
     prefix: `/${API_VERSION}/auth`,

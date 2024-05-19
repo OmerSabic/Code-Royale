@@ -1,6 +1,6 @@
 /** @typedef {import("fastify").FastifyInstance} FastifyInstance */
 
-import { eq } from "drizzle-orm";
+import { eq, DrizzleError } from "drizzle-orm";
 import { users } from "../db/schemas";
 import { comparePasswords, createSession, hashPassword } from "../utils/auth";
 
@@ -34,7 +34,7 @@ export const authRoutes = (fastify, _, done) => {
             code: "invalid_auth"
         });
 
-        if(!(await comparePasswords(user.password, request.body.password))) {
+        if(!(await comparePasswords(request.body.password, user.hashed_password))) {
             return response.status(400).send({
                 success: false,
                 code: "invalid_auth"
@@ -65,11 +65,20 @@ export const authRoutes = (fastify, _, done) => {
             },
         }
     }, async (request, response) => {
+        const hashed_password = await hashPassword(request.body.password);
         const [user] = await request.db.insert(users).values({
             username: request.body.username,
-            password: (await hashPassword(request.body.password))
+            hashed_password: hashed_password
         }).returning({
             id: users.id
+        }).catch(err => {
+            if(err.code === "23505" && err.constraint === "users_username_unique") {
+                response.status(400).send({
+                    success: false,
+                    code: "username_taken"
+                });
+                return;
+            }
         });
 
         if(!user) return response.status(400).send({

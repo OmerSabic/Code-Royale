@@ -1,5 +1,4 @@
 import type { db } from "./db";
-import { users } from "./db/schemas";
 // import type { Redis } from "./utils";
 
 declare module "fastify" {
