@@ -2,8 +2,8 @@ import { initDb } from "./db/index.js";
 import { authRoutes, testRoutes } from "./routes/index.js";
 import { env, Logger, Redis } from "./utils/index.js";
 import fastify from "fastify";
+import fastifyCookie from "@fastify/cookie";
 import { middleware } from "./modules/middleware.js";
-
 const API_VERSION = "v1";
 
 export const main = async () => {
@@ -13,8 +13,13 @@ export const main = async () => {
   });
 
   await initDb();
-  await Redis.initialize();
+  // await Redis.initialize();
 
+  server.register(fastifyCookie, {
+    secret: "my-secret", // for cookies signature
+    hook: 'preParsing', // set to false to disable cookie autoparsing or set autoparsing on any of the following hooks: 'onRequest', 'preParsing', 'preHandler', 'preValidation'. default: 'onRequest'
+    parseOptions: {},  // options for parsing cookies
+  });
   server.register(middleware);
   server.register(import("@fastify/cors"), {
     maxAge: 600,
