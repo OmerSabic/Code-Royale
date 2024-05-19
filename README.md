@@ -4,4 +4,4 @@ Code-Royale is a head-to-head coding challenge where you can join lobbies of up 
 ***GAME MODES***
 Fastest - First person to create a valid solution,
 Reverse - Given only input and output, first person to create a valid solution,
-Gold - Shortest possible solution.
+Golf - Shortest possible solution.
