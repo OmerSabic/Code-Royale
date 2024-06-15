@@ -2,8 +2,8 @@
 import { ThemeProvider } from "@/components/theme-provider";
 import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar"
 import { DropdownMenuTrigger, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuContent, DropdownMenu } from "@/components/ui/dropdown-menu"
-import { ModeToggle } from '@/components/mode-toggle';
-
+//import { ModeToggle } from '@/components/mode-toggle';
+//<ModeToggle />
 
 export default function Root() {
     return (
@@ -11,26 +11,36 @@ export default function Root() {
             <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
                 <div id="detail">
                     <header className="bg-gray-100 dark:bg-gray-800 py-3 px-4 md:px-6 flex items-center justify-between">
-                        <a className="flex items-center gap-2" href="#">
+                        <a className="flex items-center gap-2" href="/#">
                             <MountainIcon className="h-6 w-6" />
-                            <span className="text-lg font-medium">Compete</span>
+                            <span className="text-lg font-medium">Code Royale</span>
                         </a>
-                        <ModeToggle/>
-                        <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                                <Avatar className="h-9 w-9">
-                                    <AvatarImage alt="@shadcn" src="/placeholder-user.jpg" />
-                                    <AvatarFallback>JP</AvatarFallback>
-                                    <span className="sr-only">Toggle user menu</span>
-                                </Avatar>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent>
-                                <DropdownMenuItem>My Account</DropdownMenuItem>
-                                <DropdownMenuItem>Settings</DropdownMenuItem>
-                                <DropdownMenuSeparator />
-                                <DropdownMenuItem>Logout</DropdownMenuItem>
-                            </DropdownMenuContent>
-                        </DropdownMenu>
+                        <div className="flex items-center gap-4">
+                            <DropdownMenu>
+
+                                <DropdownMenuTrigger asChild>
+                                    <Avatar className="h-9 w-9">
+                                        <AvatarImage alt="@shadcn" src="/placeholder-user.jpg" />
+                                        <AvatarFallback>JP</AvatarFallback>
+                                        <span className="sr-only">Toggle user menu</span>
+                                    </Avatar>
+                                </DropdownMenuTrigger>
+
+                                <DropdownMenuContent>
+                                    <a href="/profile">
+                                        <DropdownMenuItem>Profile</DropdownMenuItem>
+                                    </a>
+                                    <a href="/account-settings">
+                                        <DropdownMenuItem>Account Settings</DropdownMenuItem>
+                                    </a>
+                                    <DropdownMenuSeparator />
+                                    <a>
+                                        <DropdownMenuItem>Logout</DropdownMenuItem>
+                                    </a>
+                                </DropdownMenuContent>
+
+                            </DropdownMenu>
+                        </div>
                     </header>
                     <Outlet />
                 </div>
@@ -38,6 +48,8 @@ export default function Root() {
         </>
     );
 }
+
+
 
 function MountainIcon(props: any) {
     return (
