@@ -2,10 +2,14 @@
 import { ThemeProvider } from "@/components/theme-provider";
 import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar"
 import { DropdownMenuTrigger, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuContent, DropdownMenu } from "@/components/ui/dropdown-menu"
+import { getCookie, deleteCookie } from "@/lib/utils"
 //import { ModeToggle } from '@/components/mode-toggle';
 //<ModeToggle />
 
 export default function Root() {
+    if (!getCookie("token")) {
+        window.location.href = "/auth"
+    }
     return (
         <>
             <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
@@ -34,7 +38,10 @@ export default function Root() {
                                         <DropdownMenuItem>Account Settings</DropdownMenuItem>
                                     </a>
                                     <DropdownMenuSeparator />
-                                    <a>
+                                    <a onClick={() => {
+                                        deleteCookie("token")
+                                        window.location.href = "/auth"
+                                    }}>
                                         <DropdownMenuItem>Logout</DropdownMenuItem>
                                     </a>
                                 </DropdownMenuContent>

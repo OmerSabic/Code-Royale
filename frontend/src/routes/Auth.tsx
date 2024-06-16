@@ -3,12 +3,33 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useState } from "react"
 import { authenticate } from "@/lib/api"
+import { setCookie, getCookie } from "@/lib/utils"
+import { Key, LoaderCircle } from "lucide-react"
 
 export default function Auth() {
+    if (getCookie("token")) {
+        window.location.href = "/"
+    }
     const [isSignUp, setIsSignUp] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
+    function HandleKeyDown(e: any) {
+        if (e.key === "Enter") {
+            Submit()
+        }
+    }
+    function Submit() {
+        setLoading(true)
+        authenticate(username, password, isSignUp ? 'signup' : 'login').then(token => {
+            setCookie("token", token, 100)
+            window.location.href = "/"
+        }).catch(error => {
+            setError(error.message)
+            setLoading(false)
+        })
+    }
     return (
         <>
             <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px] h-screen">
@@ -30,6 +51,7 @@ export default function Auth() {
                                     placeholder="HeeHeeHeeHaw182"
                                     required
                                     onChange={(e) => setUsername(e.target.value)}
+                                    onKeyDown={HandleKeyDown}
                                 />
 
                             </div>
@@ -38,12 +60,12 @@ export default function Auth() {
                                     <Label htmlFor="password">Password</Label>
                                 </div>
 
-                                <Input id="password" type="password" required onChange={(e) => setPassword(e.target.value)} />
+                                <Input id="password" type="password" required onChange={(e) => setPassword(e.target.value)} onKeyDown={HandleKeyDown} />
 
                             </div>
 
-                            <Button type="submit" className="w-full" onClick={() => authenticate(username, password, isSignUp?'signup':'login').catch(error => setError(error.message)) }>
-                                {!isSignUp ? "Login" : "Create Account"}
+                            <Button type="submit" className="w-full" onClick={() => Submit()}>
+                                {loading ? <LoaderCircle className = "animate-spin"/>:!isSignUp ? "Login" : "Create Account"}
                             </Button>
                             <p className = "text-center text-red-600">{error}</p>
                         </div>

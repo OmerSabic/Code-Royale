@@ -20,10 +20,6 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
             {
-                path: "auth",
-                element: <Auth />,
-            },
-            {
                 path: "",
                 element: <Dashboard/>,
             },
@@ -41,6 +37,16 @@ const router = createBrowserRouter([
             }
         ],
     },
+    {
+        path: "/auth",
+        errorElement: <ErrorPage />,
+        children: [
+            {
+                path: "",
+                element: <Auth />,
+            },
+        ]
+    }
 ]);
 //@ts-ignore
 ReactDOM.createRoot(document.getElementById("root")).render(
