@@ -12,35 +12,51 @@ import {
 import "./index.css";
 import Profile from "./routes/Profile";
 import Settings from "./routes/Settings";
+import Game from "./routes/Game"
+import Updates from "./routes/Updates"
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Root />,
-        errorElement: <ErrorPage />,
+        element: <Root/>,
+        errorElement: <ErrorPage/>,
         children: [
-            {
-                path: "auth",
-                element: <Auth />,
-            },
             {
                 path: "",
                 element: <Dashboard/>,
             },
             {
                 path: "lobby",
-                element: <Lobby />,
+                element: <Lobby/>,
             },
             {
                 path: "profile",
-                element: <Profile />,
+                element: <Profile/>,
             },
             {
                 path: "account-settings",
                 element: <Settings/>
+            },
+            {
+                path: "game",
+                element:<Game/>
+            },
+            {
+                path: "updates",
+                element: <Updates/>
             }
         ],
     },
+    {
+        path: "/auth",
+        errorElement: <ErrorPage/>,
+        children: [
+            {
+                path: "",
+                element: <Auth/>,
+            },
+        ]
+    }
 ]);
 //@ts-ignore
 ReactDOM.createRoot(document.getElementById("root")).render(

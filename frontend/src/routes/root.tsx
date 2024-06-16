@@ -2,15 +2,19 @@
 import { ThemeProvider } from "@/components/theme-provider";
 import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar"
 import { DropdownMenuTrigger, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuContent, DropdownMenu } from "@/components/ui/dropdown-menu"
+import { getCookie, deleteCookie } from "@/lib/utils"
 //import { ModeToggle } from '@/components/mode-toggle';
 //<ModeToggle />
 
 export default function Root() {
+    if (!getCookie("token")) {
+        window.location.href = "/auth"
+    }
     return (
         <>
             <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
                 <div id="detail">
-                    <header className="bg-gray-100 dark:bg-gray-800 py-3 px-4 md:px-6 flex items-center justify-between">
+                    <header className="bg-gray-200 dark:bg-gray-800 py-3 px-4 md:px-6 flex items-center justify-between">
                         <a className="flex items-center gap-2" href="/#">
                             <MountainIcon className="h-6 w-6" />
                             <span className="text-lg font-medium">Code Royale</span>
@@ -34,7 +38,10 @@ export default function Root() {
                                         <DropdownMenuItem>Account Settings</DropdownMenuItem>
                                     </a>
                                     <DropdownMenuSeparator />
-                                    <a>
+                                    <a onClick={() => {
+                                        deleteCookie("token")
+                                        window.location.href = "/auth"
+                                    }}>
                                         <DropdownMenuItem>Logout</DropdownMenuItem>
                                     </a>
                                 </DropdownMenuContent>
