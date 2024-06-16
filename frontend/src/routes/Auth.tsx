@@ -2,9 +2,13 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useState } from "react"
+import { authenticate } from "@/lib/api"
 
-function Auth() {
+export default function Auth() {
     const [isSignUp, setIsSignUp] = useState(false);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
     return (
         <>
             <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px] h-screen">
@@ -19,22 +23,29 @@ function Auth() {
                         <div className="grid gap-4">
                             <div className="grid gap-2">
                                 <Label htmlFor="username">Username</Label>
+
                                 <Input
                                     id="username"
                                     type="text"
                                     placeholder="HeeHeeHeeHaw182"
                                     required
+                                    onChange={(e) => setUsername(e.target.value)}
                                 />
+
                             </div>
                             <div className="grid gap-2">
                                 <div className="flex items-center">
                                     <Label htmlFor="password">Password</Label>
                                 </div>
-                                <Input id="password" type="password" required />
+
+                                <Input id="password" type="password" required onChange={(e) => setPassword(e.target.value)} />
+
                             </div>
-                            <Button type="submit" className="w-full">
+
+                            <Button type="submit" className="w-full" onClick={() => authenticate(username, password, isSignUp?'signup':'login').catch(error => setError(error.message)) }>
                                 {!isSignUp ? "Login" : "Create Account"}
                             </Button>
+                            <p className = "text-center text-red-600">{error}</p>
                         </div>
                         {
                             !isSignUp ? (
@@ -70,4 +81,4 @@ function Auth() {
     )
 }
 
-export default Auth
+
