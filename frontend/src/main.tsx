@@ -13,12 +13,13 @@ import "./index.css";
 import Profile from "./routes/Profile";
 import Settings from "./routes/Settings";
 import Game from "./routes/Game"
+import Updates from "./routes/Updates"
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Root />,
-        errorElement: <ErrorPage />,
+        element: <Root/>,
+        errorElement: <ErrorPage/>,
         children: [
             {
                 path: "",
@@ -26,11 +27,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "lobby",
-                element: <Lobby />,
+                element: <Lobby/>,
             },
             {
                 path: "profile",
-                element: <Profile />,
+                element: <Profile/>,
             },
             {
                 path: "account-settings",
@@ -39,16 +40,20 @@ const router = createBrowserRouter([
             {
                 path: "game",
                 element:<Game/>
+            },
+            {
+                path: "updates",
+                element: <Updates/>
             }
         ],
     },
     {
         path: "/auth",
-        errorElement: <ErrorPage />,
+        errorElement: <ErrorPage/>,
         children: [
             {
                 path: "",
-                element: <Auth />,
+                element: <Auth/>,
             },
         ]
     }

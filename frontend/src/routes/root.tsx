@@ -14,7 +14,7 @@ export default function Root() {
         <>
             <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
                 <div id="detail">
-                    <header className="bg-gray-100 dark:bg-gray-800 py-3 px-4 md:px-6 flex items-center justify-between">
+                    <header className="bg-gray-200 dark:bg-gray-800 py-3 px-4 md:px-6 flex items-center justify-between">
                         <a className="flex items-center gap-2" href="/#">
                             <MountainIcon className="h-6 w-6" />
                             <span className="text-lg font-medium">Code Royale</span>

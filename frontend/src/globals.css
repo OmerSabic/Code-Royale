@@ -75,3 +75,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+.code-block {
+    overflow-x: scroll;
+    display: block;
+    @apply bg-stone-800 text-white p-2;
+}

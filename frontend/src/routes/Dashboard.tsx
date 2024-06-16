@@ -17,7 +17,6 @@ To read more about using these font, please visit the Next.js documentation:
 - App Directory: https://nextjs.org/docs/app/building-your-application/optimizing/fonts
 - Pages Directory: https://nextjs.org/docs/pages/building-your-application/optimizing/fonts
 **/
-import { DropdownMenuTrigger, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuContent, DropdownMenu } from "@/components/ui/dropdown-menu"
 import { CardTitle, CardDescription, CardHeader, CardContent, Card } from "@/components/ui/card"
 
 export default function Dashboard() {
@@ -43,7 +42,7 @@ export default function Dashboard() {
                 <div className="flex justify-end">
                   <a
                     className="inline-flex items-center justify-center px-4 py-2 bg-[#0077b6] text-white font-medium rounded-md hover:bg-[#00a8e8] transition-colors"
-                    href="#"
+                    href="/game"
                   >
                     Join
                   </a>
@@ -63,7 +62,7 @@ export default function Dashboard() {
                 <div className="flex justify-end">
                   <a
                     className="inline-flex items-center justify-center px-4 py-2 bg-[#0077b6] text-white font-medium rounded-md hover:bg-[#00a8e8] transition-colors"
-                    href="#"
+                    href="/game"
                   >
                     Join
                   </a>
@@ -83,7 +82,7 @@ export default function Dashboard() {
                 <div className="flex justify-end">
                   <a
                     className="inline-flex items-center justify-center px-4 py-2 bg-[#0077b6] text-white font-medium rounded-md hover:bg-[#00a8e8] transition-colors"
-                    href="#"
+                    href="/game"
                   >
                     Join
                   </a>
@@ -94,7 +93,7 @@ export default function Dashboard() {
           <div className="mt-8 md:mt-12 flex justify-center">
             <a
               className="inline-flex items-center justify-center px-6 py-3 bg-[#0077b6] text-white font-medium rounded-md hover:bg-[#00a8e8] transition-colors"
-              href="#"
+              href="/lobby"
             >
               Create a New Lobby
             </a>
@@ -119,7 +118,7 @@ export default function Dashboard() {
                 <div className="flex justify-end">
                   <a
                     className="inline-flex items-center justify-center px-4 py-2 bg-[#0077b6] text-white font-medium rounded-md hover:bg-[#00a8e8] transition-colors"
-                    href="#"
+                    href="/updates"
                   >
                     Read More
                   </a>
@@ -138,7 +137,7 @@ export default function Dashboard() {
                 <div className="flex justify-end">
                   <a
                     className="inline-flex items-center justify-center px-4 py-2 bg-[#0077b6] text-white font-medium rounded-md hover:bg-[#00a8e8] transition-colors"
-                    href="#"
+                    href="/updates"
                   >
                     Read More
                   </a>
@@ -156,7 +155,7 @@ export default function Dashboard() {
                 <div className="flex justify-end">
                   <a
                     className="inline-flex items-center justify-center px-4 py-2 bg-[#0077b6] text-white font-medium rounded-md hover:bg-[#00a8e8] transition-colors"
-                    href="#"
+                    href="/updates"
                   >
                     Read More
                   </a>
