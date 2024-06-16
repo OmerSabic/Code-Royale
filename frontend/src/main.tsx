@@ -12,6 +12,7 @@ import {
 import "./index.css";
 import Profile from "./routes/Profile";
 import Settings from "./routes/Settings";
+import Game from "./routes/Game"
 
 const router = createBrowserRouter([
     {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
             {
                 path: "account-settings",
                 element: <Settings/>
+            },
+            {
+                path: "game",
+                element:<Game/>
             }
         ],
     },
